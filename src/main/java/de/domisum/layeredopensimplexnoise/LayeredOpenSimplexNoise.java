@@ -1,0 +1,87 @@
+package de.domisum.layeredopensimplexnoise;
+
+import lombok.Getter;
+import opensimplexnoise.OpenSimplexNoise;
+
+import java.util.Arrays;
+
+public class LayeredOpenSimplexNoise
+{
+
+	// SETTINGS
+	@Getter private final NoiseLayer[] layers;
+
+	// TEMP
+	private final OpenSimplexNoise[] noiseFields;
+
+
+	// -------
+	// INITIALIZATION
+	// -------
+	public LayeredOpenSimplexNoise(NoiseLayer... layers)
+	{
+		if(layers == null || layers.length == 0)
+			throw new IllegalArgumentException("At least 1 layer is needed");
+
+		this.layers = layers;
+		this.noiseFields = new OpenSimplexNoise[layers.length];
+		for(int i = 0; i < layers.length; i++)
+			this.noiseFields[i] = new OpenSimplexNoise(layers[i].getSeed());
+	}
+
+
+	// -------
+	// OBJECT
+	// -------
+	@Override
+	public String toString()
+	{
+		return this.getClass().getSimpleName()+"{"+"layers="+Arrays.toString(this.layers)+'}';
+	}
+
+
+	// -------
+	// NOISE
+	// -------
+	public double evaluate(double x, double y)
+	{
+		return evaluate(x, y, 0, 0, 2);
+	}
+
+	public double evaluate(double x, double y, double z)
+	{
+		return evaluate(x, y, z, 0, 3);
+	}
+
+	public double evaluate(double x, double y, double z, double w)
+	{
+		return evaluate(x, y, z, w, 4);
+	}
+
+
+	private double evaluate(double x, double y, double z, double w, int dimensions)
+	{
+		double sum = 0;
+		double maxSum = 0;
+
+		for(int i = 0; i < this.layers.length; i++)
+		{
+			NoiseLayer layer = this.layers[i];
+			OpenSimplexNoise openSimplexNoise = this.noiseFields[i];
+
+			double eval;
+			if(dimensions == 2)
+				eval = openSimplexNoise.eval(x/layer.getScale(), y/layer.getScale());
+			else if(dimensions == 3)
+				eval = openSimplexNoise.eval(x/layer.getScale(), y/layer.getScale(), z/layer.getScale());
+			else
+				eval = openSimplexNoise.eval(x/layer.getScale(), y/layer.getScale(), z/layer.getScale(), w/layer.getScale());
+
+			sum += eval*layer.getFrequency();
+			maxSum += layer.getFrequency();
+		}
+
+		return sum/maxSum;
+	}
+
+}
