@@ -35,7 +35,7 @@ public class OctavedOpenSimplexNoise extends LayeredOpenSimplexNoise
 			throw new IllegalArgumentException("baseScale and scaleMultiplier have to be positive");
 
 		if(baseFrequency <= 0 || frequencyMultiplier <= 0)
-			throw new IllegalArgumentException("baseScale and scaleMultiplier have to be positive");
+			throw new IllegalArgumentException("baseFrequency and baseFrequency have to be positive");
 
 
 		double scale = baseScale;
