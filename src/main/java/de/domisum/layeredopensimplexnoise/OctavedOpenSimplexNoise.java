@@ -11,22 +11,32 @@ public class OctavedOpenSimplexNoise extends LayeredOpenSimplexNoise
 	public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseFrequency,
 			double frequencyMultiplier, long seed)
 	{
-		super(generateLayers(octaves, baseScale, scaleMultiplier, baseFrequency, frequencyMultiplier,
+		super(generateNoiseLayers(octaves, baseScale, scaleMultiplier, baseFrequency, frequencyMultiplier,
 				generateSeeds(seed, octaves)));
 	}
 
 	public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseFrequency,
 			double frequencyMultiplier, long... seeds)
 	{
-		super(generateLayers(octaves, baseScale, scaleMultiplier, baseFrequency, frequencyMultiplier, seeds));
+		super(generateNoiseLayers(octaves, baseScale, scaleMultiplier, baseFrequency, frequencyMultiplier, seeds));
 	}
 
 
-	private static NoiseLayer[] generateLayers(int octaves, double baseScale, double scaleMultiplier, double baseFrequency,
+	private static NoiseLayer[] generateNoiseLayers(int octaves, double baseScale, double scaleMultiplier, double baseFrequency,
 			double frequencyMultiplier, long... seeds)
 	{
+		if(octaves <= 0)
+			throw new IllegalArgumentException("The number of octaves has to be positive");
+
 		if(seeds.length != octaves)
 			throw new IllegalArgumentException("The number of octaves does not match the number of seeds");
+
+		if(baseScale <= 0 || scaleMultiplier <= 0)
+			throw new IllegalArgumentException("baseScale and scaleMultiplier have to be positive");
+
+		if(baseFrequency <= 0 || frequencyMultiplier <= 0)
+			throw new IllegalArgumentException("baseScale and scaleMultiplier have to be positive");
+
 
 		double scale = baseScale;
 		double frequency = baseFrequency;
