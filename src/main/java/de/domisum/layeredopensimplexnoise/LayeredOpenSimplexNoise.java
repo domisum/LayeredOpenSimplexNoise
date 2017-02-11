@@ -77,8 +77,8 @@ public class LayeredOpenSimplexNoise
 			else
 				eval = openSimplexNoise.eval(x/layer.getScale(), y/layer.getScale(), z/layer.getScale(), w/layer.getScale());
 
-			sum += eval*layer.getFrequency();
-			maxSum += layer.getFrequency();
+			sum += eval*layer.getAmplitude();
+			maxSum += layer.getAmplitude();
 		}
 
 		return sum/maxSum;

@@ -6,23 +6,23 @@ public final class NoiseLayer
 {
 
 	@Getter private double scale;
-	@Getter private double frequency;
+	@Getter private double amplitude;
 	@Getter private long seed;
 
 
 	// -------
 	// INITIALIZATION
 	// -------
-	public NoiseLayer(double scale, double frequency, long seed)
+	public NoiseLayer(double scale, double amplitude, long seed)
 	{
 		if(scale <= 0)
 			throw new IllegalArgumentException("The scale has to be positive");
 
-		if(frequency <= 0)
-			throw new IllegalArgumentException("The frequency has to be positive");
+		if(amplitude <= 0)
+			throw new IllegalArgumentException("The amplitude has to be positive");
 
 		this.scale = scale;
-		this.frequency = frequency;
+		this.amplitude = amplitude;
 		this.seed = seed;
 	}
 
@@ -33,7 +33,7 @@ public final class NoiseLayer
 	@Override
 	public String toString()
 	{
-		return "NoiseLayer{"+"scale="+this.scale+", frequency="+this.frequency+", seed="+this.seed+'}';
+		return "NoiseLayer{"+"scale="+this.scale+", amplitude="+this.amplitude+", seed="+this.seed+'}';
 	}
 
 }
