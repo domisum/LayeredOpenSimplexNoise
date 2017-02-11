@@ -8,22 +8,22 @@ public class OctavedOpenSimplexNoise extends LayeredOpenSimplexNoise
 	// -------
 	// INITIALIZATION
 	// -------
-	public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseFrequency,
-			double frequencyMultiplier, long seed)
+	public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
+			double amplitudeMultiplier, long seed)
 	{
-		super(generateNoiseLayers(octaves, baseScale, scaleMultiplier, baseFrequency, frequencyMultiplier,
+		super(generateNoiseLayers(octaves, baseScale, scaleMultiplier, baseAmplitude, amplitudeMultiplier,
 				generateSeeds(seed, octaves)));
 	}
 
-	public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseFrequency,
-			double frequencyMultiplier, long... seeds)
+	public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
+			double amplitudeMultiplier, long... seeds)
 	{
-		super(generateNoiseLayers(octaves, baseScale, scaleMultiplier, baseFrequency, frequencyMultiplier, seeds));
+		super(generateNoiseLayers(octaves, baseScale, scaleMultiplier, baseAmplitude, amplitudeMultiplier, seeds));
 	}
 
 
-	private static NoiseLayer[] generateNoiseLayers(int octaves, double baseScale, double scaleMultiplier, double baseFrequency,
-			double frequencyMultiplier, long... seeds)
+	private static NoiseLayer[] generateNoiseLayers(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
+			double amplitudeMultiplier, long... seeds)
 	{
 		if(octaves <= 0)
 			throw new IllegalArgumentException("The number of octaves has to be positive");
@@ -34,20 +34,20 @@ public class OctavedOpenSimplexNoise extends LayeredOpenSimplexNoise
 		if(baseScale <= 0 || scaleMultiplier <= 0)
 			throw new IllegalArgumentException("baseScale and scaleMultiplier have to be positive");
 
-		if(baseFrequency <= 0 || frequencyMultiplier <= 0)
-			throw new IllegalArgumentException("baseFrequency and baseFrequency have to be positive");
+		if(baseAmplitude <= 0 || amplitudeMultiplier <= 0)
+			throw new IllegalArgumentException("baseAmplitude and amplitudeMultiplier have to be positive");
 
 
 		double scale = baseScale;
-		double frequency = baseFrequency;
+		double amplitude = baseAmplitude;
 
 		NoiseLayer[] layers = new NoiseLayer[octaves];
 		for(int i = 0; i < octaves; i++)
 		{
-			layers[i] = new NoiseLayer(scale, frequency, seeds[i]);
+			layers[i] = new NoiseLayer(scale, amplitude, seeds[i]);
 
 			scale *= scaleMultiplier;
-			frequency *= frequencyMultiplier;
+			amplitude *= amplitudeMultiplier;
 		}
 
 		return layers;
