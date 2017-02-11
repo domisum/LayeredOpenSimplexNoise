@@ -62,7 +62,6 @@ public class LayeredOpenSimplexNoise
 	private double evaluate(double x, double y, double z, double w, int dimensions)
 	{
 		double sum = 0;
-		double maxSum = 0;
 
 		for(int i = 0; i < this.layers.length; i++)
 		{
@@ -78,10 +77,9 @@ public class LayeredOpenSimplexNoise
 				eval = openSimplexNoise.eval(x/layer.getScale(), y/layer.getScale(), z/layer.getScale(), w/layer.getScale());
 
 			sum += eval*layer.getAmplitude();
-			maxSum += layer.getAmplitude();
 		}
 
-		return sum/maxSum;
+		return sum;
 	}
 
 }
