@@ -1,5 +1,6 @@
 package de.domisum.layeredopensimplexnoise;
 
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import lombok.Getter;
 
 public final class NoiseLayer
@@ -13,6 +14,7 @@ public final class NoiseLayer
 	// -------
 	// INITIALIZATION
 	// -------
+	@APIUsage
 	public NoiseLayer(double scale, double amplitude, long seed)
 	{
 		if(scale <= 0)
