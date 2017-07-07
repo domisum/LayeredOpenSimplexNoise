@@ -1,5 +1,6 @@
 package de.domisum.layeredopensimplexnoise;
 
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import lombok.Getter;
 import opensimplexnoise.OpenSimplexNoise;
 
@@ -15,10 +16,8 @@ public class LayeredOpenSimplexNoise
 	private final OpenSimplexNoise[] noiseFields;
 
 
-	// -------
 	// INITIALIZATION
-	// -------
-	public LayeredOpenSimplexNoise(NoiseLayer... layers)
+	@APIUsage public LayeredOpenSimplexNoise(NoiseLayer... layers)
 	{
 		if(layers == null || layers.length == 0)
 			throw new IllegalArgumentException("At least 1 layer is needed");
@@ -30,30 +29,25 @@ public class LayeredOpenSimplexNoise
 	}
 
 
-	// -------
 	// OBJECT
-	// -------
-	@Override
-	public String toString()
+	@Override public String toString()
 	{
 		return this.getClass().getSimpleName()+"{"+"layers="+Arrays.toString(this.layers)+'}';
 	}
 
 
-	// -------
 	// NOISE
-	// -------
-	public double evaluate(double x, double y)
+	@APIUsage public double evaluate(double x, double y)
 	{
 		return evaluate(x, y, 0, 0, 2);
 	}
 
-	public double evaluate(double x, double y, double z)
+	@APIUsage public double evaluate(double x, double y, double z)
 	{
 		return evaluate(x, y, z, 0, 3);
 	}
 
-	public double evaluate(double x, double y, double z, double w)
+	@APIUsage public double evaluate(double x, double y, double z, double w)
 	{
 		return evaluate(x, y, z, w, 4);
 	}
