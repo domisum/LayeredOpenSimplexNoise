@@ -11,11 +11,8 @@ public final class NoiseLayer
 	@Getter private long seed;
 
 
-	// -------
 	// INITIALIZATION
-	// -------
-	@APIUsage
-	public NoiseLayer(double scale, double amplitude, long seed)
+	@APIUsage public NoiseLayer(double scale, double amplitude, long seed)
 	{
 		if(scale <= 0)
 			throw new IllegalArgumentException("The scale has to be positive");
@@ -29,11 +26,8 @@ public final class NoiseLayer
 	}
 
 
-	// -------
 	// OBJECT
-	// -------
-	@Override
-	public String toString()
+	@Override public String toString()
 	{
 		return "NoiseLayer{"+"scale="+this.scale+", amplitude="+this.amplitude+", seed="+this.seed+'}';
 	}
