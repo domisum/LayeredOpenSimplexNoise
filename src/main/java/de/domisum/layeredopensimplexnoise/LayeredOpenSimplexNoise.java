@@ -6,6 +6,7 @@ import opensimplexnoise.OpenSimplexNoise;
 
 import java.util.Arrays;
 
+@APIUsage
 public class LayeredOpenSimplexNoise
 {
 
