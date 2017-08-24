@@ -1,14 +1,15 @@
 package de.domisum.layeredopensimplexnoise;
 
 import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
-import lombok.Getter;
+import lombok.ToString;
 
+@ToString
 public final class NoiseLayer
 {
 
-	@Getter private double scale;
-	@Getter private double amplitude;
-	@Getter private long seed;
+	public final double scale;
+	public final double amplitude;
+	public final long seed;
 
 
 	// INITIALIZATION
@@ -23,13 +24,6 @@ public final class NoiseLayer
 		this.scale = scale;
 		this.amplitude = amplitude;
 		this.seed = seed;
-	}
-
-
-	// OBJECT
-	@Override public String toString()
-	{
-		return "NoiseLayer{"+"scale="+this.scale+", amplitude="+this.amplitude+", seed="+this.seed+'}';
 	}
 
 }

@@ -8,9 +8,7 @@ import java.util.Random;
 public class OctavedOpenSimplexNoise extends LayeredOpenSimplexNoise
 {
 
-	// -------
 	// INITIALIZATION
-	// -------
 	@APIUsage public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
 			double amplitudeMultiplier, long seed)
 	{
@@ -25,7 +23,7 @@ public class OctavedOpenSimplexNoise extends LayeredOpenSimplexNoise
 	}
 
 
-	private static NoiseLayer[] generateNoiseLayers(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
+	private static NoiseLayers generateNoiseLayers(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
 			double amplitudeMultiplier, long... seeds)
 	{
 		if(octaves <= 0)
@@ -53,7 +51,7 @@ public class OctavedOpenSimplexNoise extends LayeredOpenSimplexNoise
 			amplitude *= amplitudeMultiplier;
 		}
 
-		return layers;
+		return new NoiseLayers(layers);
 	}
 
 	private static long[] generateSeeds(long baseSeed, int number)

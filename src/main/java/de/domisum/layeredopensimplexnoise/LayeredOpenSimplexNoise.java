@@ -2,38 +2,33 @@ package de.domisum.layeredopensimplexnoise;
 
 import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import lombok.Getter;
+import lombok.ToString;
 import opensimplexnoise.OpenSimplexNoise;
 
-import java.util.Arrays;
-
 @APIUsage
+@ToString
 public class LayeredOpenSimplexNoise
 {
 
 	// SETTINGS
-	@Getter private final NoiseLayer[] layers;
+	@Getter private final NoiseLayers noiseLayers;
 
 	// TEMP
 	private final OpenSimplexNoise[] noiseFields;
 
 
 	// INITIALIZATION
-	@APIUsage public LayeredOpenSimplexNoise(NoiseLayer... layers)
+	@APIUsage public LayeredOpenSimplexNoise(NoiseLayer... noiseLayers)
 	{
-		if(layers == null || layers.length == 0)
-			throw new IllegalArgumentException("At least 1 layer is needed");
-
-		this.layers = layers;
-		this.noiseFields = new OpenSimplexNoise[layers.length];
-		for(int i = 0; i < layers.length; i++)
-			this.noiseFields[i] = new OpenSimplexNoise(layers[i].getSeed());
+		this(new NoiseLayers(noiseLayers));
 	}
 
-
-	// OBJECT
-	@Override public String toString()
+	@APIUsage public LayeredOpenSimplexNoise(NoiseLayers noiseLayers)
 	{
-		return this.getClass().getSimpleName()+"{"+"layers="+Arrays.toString(this.layers)+'}';
+		this.noiseLayers = noiseLayers;
+		this.noiseFields = new OpenSimplexNoise[noiseLayers.layers.size()];
+		for(int i = 0; i < noiseLayers.layers.size(); i++)
+			this.noiseFields[i] = new OpenSimplexNoise(noiseLayers.layers.get(i).seed);
 	}
 
 
@@ -58,20 +53,20 @@ public class LayeredOpenSimplexNoise
 	{
 		double sum = 0;
 
-		for(int i = 0; i < this.layers.length; i++)
+		for(int i = 0; i < this.noiseLayers.layers.size(); i++)
 		{
-			NoiseLayer layer = this.layers[i];
+			NoiseLayer layer = this.noiseLayers.layers.get(i);
 			OpenSimplexNoise openSimplexNoise = this.noiseFields[i];
 
 			double eval;
 			if(dimensions == 2)
-				eval = openSimplexNoise.eval(x/layer.getScale(), y/layer.getScale());
+				eval = openSimplexNoise.eval(x/layer.scale, y/layer.scale);
 			else if(dimensions == 3)
-				eval = openSimplexNoise.eval(x/layer.getScale(), y/layer.getScale(), z/layer.getScale());
+				eval = openSimplexNoise.eval(x/layer.scale, y/layer.scale, z/layer.scale);
 			else
-				eval = openSimplexNoise.eval(x/layer.getScale(), y/layer.getScale(), z/layer.getScale(), w/layer.getScale());
+				eval = openSimplexNoise.eval(x/layer.scale, y/layer.scale, z/layer.scale, w/layer.scale);
 
-			sum += eval*layer.getAmplitude();
+			sum += eval*layer.amplitude;
 		}
 
 		return sum;
