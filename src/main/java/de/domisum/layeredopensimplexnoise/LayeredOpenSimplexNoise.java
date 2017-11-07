@@ -1,11 +1,11 @@
 package de.domisum.layeredopensimplexnoise;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import lombok.Getter;
 import lombok.ToString;
 import opensimplexnoise.OpenSimplexNoise;
 
-@APIUsage
+@API
 @ToString
 public class LayeredOpenSimplexNoise
 {
@@ -18,12 +18,12 @@ public class LayeredOpenSimplexNoise
 
 
 	// INITIALIZATION
-	@APIUsage public LayeredOpenSimplexNoise(NoiseLayer... noiseLayers)
+	@API public LayeredOpenSimplexNoise(NoiseLayer... noiseLayers)
 	{
 		this(new NoiseLayers(noiseLayers));
 	}
 
-	@APIUsage public LayeredOpenSimplexNoise(NoiseLayers noiseLayers)
+	@API public LayeredOpenSimplexNoise(NoiseLayers noiseLayers)
 	{
 		this.noiseLayers = noiseLayers;
 		this.noiseFields = new OpenSimplexNoise[noiseLayers.layers.size()];
@@ -33,17 +33,17 @@ public class LayeredOpenSimplexNoise
 
 
 	// NOISE
-	@APIUsage public double evaluate(double x, double y)
+	@API public double evaluate(double x, double y)
 	{
 		return evaluate(x, y, 0, 0, 2);
 	}
 
-	@APIUsage public double evaluate(double x, double y, double z)
+	@API public double evaluate(double x, double y, double z)
 	{
 		return evaluate(x, y, z, 0, 3);
 	}
 
-	@APIUsage public double evaluate(double x, double y, double z, double w)
+	@API public double evaluate(double x, double y, double z, double w)
 	{
 		return evaluate(x, y, z, w, 4);
 	}

@@ -1,22 +1,22 @@
 package de.domisum.layeredopensimplexnoise;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 
 import java.util.Random;
 
-@APIUsage
+@API
 public class OctavedOpenSimplexNoise extends LayeredOpenSimplexNoise
 {
 
 	// INITIALIZATION
-	@APIUsage public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
+	@API public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
 			double amplitudeMultiplier, long seed)
 	{
 		super(generateNoiseLayers(octaves, baseScale, scaleMultiplier, baseAmplitude, amplitudeMultiplier,
 				generateSeeds(seed, octaves)));
 	}
 
-	@APIUsage public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
+	@API public OctavedOpenSimplexNoise(int octaves, double baseScale, double scaleMultiplier, double baseAmplitude,
 			double amplitudeMultiplier, long... seeds)
 	{
 		super(generateNoiseLayers(octaves, baseScale, scaleMultiplier, baseAmplitude, amplitudeMultiplier, seeds));

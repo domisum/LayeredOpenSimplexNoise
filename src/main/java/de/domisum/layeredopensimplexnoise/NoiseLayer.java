@@ -1,6 +1,6 @@
 package de.domisum.layeredopensimplexnoise;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import lombok.ToString;
 
 @ToString
@@ -13,7 +13,7 @@ public final class NoiseLayer
 
 
 	// INITIALIZATION
-	@APIUsage public NoiseLayer(double scale, double amplitude, long seed)
+	@API public NoiseLayer(double scale, double amplitude, long seed)
 	{
 		if(scale <= 0)
 			throw new IllegalArgumentException("The scale has to be positive");

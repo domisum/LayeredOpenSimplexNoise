@@ -16,7 +16,7 @@ package opensimplexnoise;
  *   will be the same when ported to other languages.
  */
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 
 public class OpenSimplexNoise
 {
@@ -38,12 +38,12 @@ public class OpenSimplexNoise
 	private short[] permGradIndex3D;
 
 
-	@APIUsage public OpenSimplexNoise()
+	@API public OpenSimplexNoise()
 	{
 		this(DEFAULT_SEED);
 	}
 
-	@APIUsage public OpenSimplexNoise(short[] perm)
+	@API public OpenSimplexNoise(short[] perm)
 	{
 		this.perm = perm;
 		this.permGradIndex3D = new short[256];
@@ -58,7 +58,7 @@ public class OpenSimplexNoise
 	//Initializes the class using a permutation array generated from a 64-bit seed.
 	//Generates a proper permutation (i.e. doesn't merely perform N successive pair swaps on a base array)
 	//Uses a simple 64-bit LCG.
-	@APIUsage public OpenSimplexNoise(long seed)
+	@API public OpenSimplexNoise(long seed)
 	{
 		this.perm = new short[256];
 		this.permGradIndex3D = new short[256];
@@ -81,7 +81,7 @@ public class OpenSimplexNoise
 	}
 
 	//2D OpenSimplex Noise.
-	@APIUsage public double eval(double x, double y)
+	@API public double eval(double x, double y)
 	{
 
 		//Place input coordinates onto grid.
@@ -216,7 +216,7 @@ public class OpenSimplexNoise
 	}
 
 	//3D OpenSimplex Noise.
-	@APIUsage public double eval(double x, double y, double z)
+	@API public double eval(double x, double y, double z)
 	{
 
 		//Place input coordinates on simplectic honeycomb.
@@ -879,7 +879,7 @@ public class OpenSimplexNoise
 	}
 
 	//4D OpenSimplex Noise.
-	@APIUsage public double eval(double x, double y, double z, double w)
+	@API public double eval(double x, double y, double z, double w)
 	{
 
 		//Place input coordinates on simplectic honeycomb.

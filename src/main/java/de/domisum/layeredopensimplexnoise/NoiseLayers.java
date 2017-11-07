@@ -1,6 +1,6 @@
 package de.domisum.layeredopensimplexnoise;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,12 +15,12 @@ public class NoiseLayers
 
 
 	// INIT
-	@APIUsage public NoiseLayers(NoiseLayer... layers)
+	@API public NoiseLayers(NoiseLayer... layers)
 	{
 		this(Arrays.asList(layers));
 	}
 
-	@APIUsage public NoiseLayers(List<NoiseLayer> layers)
+	@API public NoiseLayers(List<NoiseLayer> layers)
 	{
 		if(layers == null || layers.isEmpty())
 			throw new IllegalArgumentException("At least 1 layer is needed");
@@ -30,7 +30,7 @@ public class NoiseLayers
 
 
 	// GETTERS
-	@APIUsage public NoiseLayers getRandomSeedsCopy(Random random)
+	@API public NoiseLayers getRandomSeedsCopy(Random random)
 	{
 		List<NoiseLayer> newLayers = new ArrayList<>();
 		for(NoiseLayer nl : this.layers)
