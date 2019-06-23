@@ -3,6 +3,11 @@ package de.domisum.layeredopensimplexnoise;
 import de.domisum.lib.auxilium.util.java.annotations.API;
 import lombok.ToString;
 
+/**
+ * scale: high value -> noise field changes slowly while moving; low value -> noise field changes fast while moving
+ * amplitude: the amplitude of the output value (how high and how low it can get)
+ * seed: value used to initialize the pseudorandom number generator
+ */
 @ToString
 public final class NoiseLayer
 {
